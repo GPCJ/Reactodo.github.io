@@ -1,73 +1,37 @@
-# React + TypeScript + Vite
+# Reactodo: TypeScript 기반 체크리스트 앱 📝
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 프로젝트 개요
 
-Currently, two official plugins are available:
+이 프로젝트는 기존의 HTML/CSS/Vanilla JS로 작성된 체크리스트 앱을 React와 TypeScript 환경으로 성공적으로 전환한 프로젝트입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 주요 목표
 
-## React Compiler
+- React 컴포넌트 구조 이해 및 분리
+- TypeScript 인터페이스를 활용한 타입 안전성 확보
+- `useState`와 `useEffect`를 사용한 상태 관리 및 데이터 영속성 구현
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 기술 스택
 
-## Expanding the ESLint configuration
+- **Front-end:** React, TypeScript
+- **Build Tool:** Vite
+- **State Management:** React Hooks (`useState`, `useEffect`, `useCallback`)
+- **Data Persistence:** Local Storage
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 실행 방법
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1.  **종속성 설치:**
+    ```bash
+    npm install
+    ```
+2.  **개발 서버 실행:**
+    ```bash
+    npm run dev
+    ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 구조 (Components)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `App.tsx`: 최상위 컴포넌트로, 모든 할 일 데이터(`todos`)를 관리합니다.
+- `types.ts`: `Todo` 객체의 타입 구조를 정의합니다.
+- `TodoInput.tsx`: 새로운 할 일을 입력받고 `App.tsx`로 추가 요청을 보냅니다.
+- `TodoList.tsx`: `App.tsx`로부터 목록 데이터를 받아 `TodoItem` 컴포넌트들을 렌더링합니다.
+- `TodoItem.tsx`: 개별 할 일 항목(체크박스, 텍스트, 삭제 버튼)을 표시하고, 사용자 액션을 `App.tsx`로 전달합니다.
